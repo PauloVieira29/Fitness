@@ -1,14 +1,15 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "Fitness Platform API",
-    "description": "API completa para gestão de treinos, utilizadores e planos."
+    "description": "API completa com fluxos de Treinador, Cliente e Treinos."
   },
   "host": "localhost:5000",
   "basePath": "/api",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "securityDefinitions": {
     "Bearer": {
@@ -27,13 +28,15 @@
   "tags": [
     { "name": "Auth", "description": "Autenticação e Registo" },
     { "name": "Users", "description": "Gestão de Utilizadores e Perfil" },
-    { "name": "Plans", "description": "Gestão de Planos de Treino" }
+    { "name": "Trainers", "description": "Gestão de Clientes e Pedidos (Lado do Treinador)" },
+    { "name": "Plans", "description": "Gestão de Planos de Treino" },
+    { "name": "Entries", "description": "Registos de Treino e Estatísticas" }
   ],
   "paths": {
     "/auth/register": {
       "post": {
         "tags": ["Auth"],
-        "description": "Registar um novo utilizador (Cliente ou Treinador)",
+        "summary": "Registar novo utilizador",
         "parameters": [
           {
             "name": "body",
@@ -66,7 +69,7 @@
     "/auth/login": {
       "post": {
         "tags": ["Auth"],
-        "description": "Login para obter o Token de acesso",
+        "summary": "Login",
         "parameters": [
           {
             "name": "body",
@@ -88,7 +91,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "token": { "type": "string", "description": "Token JWT para usar nas outras rotas" },
+                "token": { "type": "string" },
                 "user": { "type": "object" }
               }
             }
@@ -99,18 +102,15 @@
     "/users/me": {
       "get": {
         "tags": ["Users"],
-        "summary": "Obter o meu perfil",
-        "description": "Retorna os dados do utilizador logado (Requer Token)",
+        "summary": "Obter perfil logado",
         "security": [{ "Bearer": [] }],
         "responses": {
-          "200": { "description": "Dados do perfil retornados com sucesso" },
-          "401": { "description": "Não autorizado (Falta token)" }
+          "200": { "description": "Dados do perfil retornados com sucesso" }
         }
       },
       "patch": {
         "tags": ["Users"],
         "summary": "Atualizar Perfil",
-        "description": "Atualiza peso, altura ou outros dados (Requer Token)",
         "security": [{ "Bearer": [] }],
         "parameters": [
           {
@@ -122,7 +122,7 @@
               "properties": {
                 "weight": { "type": "number", "example": 75.5 },
                 "height": { "type": "number", "example": 180 },
-                "goal": { "type": "string", "example": "Ganhar massa muscular" }
+                "goal": { "type": "string", "example": "Hipertrofia" }
               }
             }
           }
@@ -132,25 +132,231 @@
         }
       }
     },
-    "/users/trainers": {
-      "get": {
+    "/users/me/password": {
+      "patch": {
         "tags": ["Users"],
-        "summary": "Listar Treinadores",
-        "description": "Lista todos os treinadores validados na plataforma",
+        "summary": "Alterar Password",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "currentPassword": { "type": "string" },
+                "newPassword": { "type": "string" },
+                "confirmPassword": { "type": "string" }
+              }
+            }
+          }
+        ],
         "responses": {
-          "200": { "description": "Lista de treinadores" }
+          "200": { "description": "Password alterada com sucesso" }
+        }
+      }
+    },
+    "/users/me/request-trainer-change": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Pedir para mudar/atribuir treinador",
+        "description": "Envia um pedido pendente para um treinador específico.",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["newTrainerId"],
+              "properties": {
+                "newTrainerId": { "type": "string", "example": "ID_DO_TREINADOR" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Pedido enviado com sucesso" },
+          "400": { "description": "Já tens um pedido pendente ou erro de validação" }
+        }
+      }
+    },
+    "/users/me/check-missed-workout": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Verificar se falhou treino ontem",
+        "description": "Verifica se ontem era dia de treino e se não foi cumprido, criando um alerta.",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Resultado da verificação",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "missed": { "type": "boolean" },
+                "message": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trainers/requests": {
+      "get": {
+        "tags": ["Trainers"],
+        "summary": "Listar pedidos de adesão (Apenas Treinadores)",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": { "description": "Lista de pedidos pendentes" }
+        }
+      }
+    },
+    "/trainers/requests/{id}/resolve": {
+      "post": {
+        "tags": ["Trainers"],
+        "summary": "Aceitar ou Rejeitar Cliente",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do Pedido (Request ID)"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["action"],
+              "properties": {
+                "action": { "type": "string", "enum": ["accept", "reject"] }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Pedido resolvido com sucesso" }
+        }
+      }
+    },
+    "/trainers/clients/{id}/remove": {
+      "patch": {
+        "tags": ["Trainers"],
+        "summary": "Remover Cliente",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Cliente removido com sucesso" }
+        }
+      }
+    },
+    "/trainers/alert-client": {
+      "post": {
+        "tags": ["Trainers"],
+        "summary": "Enviar Alerta Manual",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clientId": { "type": "string" },
+                "message": { "type": "string", "example": "Atenção à dieta!" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Alerta enviado" }
+        }
+      }
+    },
+    "/entries": {
+      "get": {
+        "tags": ["Entries"],
+        "summary": "Obter Histórico de Treinos",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          { "name": "startDate", "in": "query", "type": "string", "format": "date" },
+          { "name": "endDate", "in": "query", "type": "string", "format": "date" }
+        ],
+        "responses": {
+          "200": { "description": "Histórico retornado" }
+        }
+      },
+      "post": {
+        "tags": ["Entries"],
+        "summary": "Registar ou Atualizar Treino",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["date"],
+              "properties": {
+                "date": { "type": "string", "format": "date", "example": "2023-10-25" },
+                "completed": { "type": "boolean", "example": true },
+                "caloriesBurned": { "type": "number", "example": 450 },
+                "notes": { "type": "string", "example": "Treino difícil hoje" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Treino registado com sucesso" },
+          "403": { "description": "Erro: Tentativa de completar treino futuro" }
+        }
+      }
+    },
+    "/entries/stats": {
+      "get": {
+        "tags": ["Entries"],
+        "summary": "Estatísticas de Treino",
+        "description": "Retorna dados agrupados para gráficos (semanal ou mensal)",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          { "name": "period", "in": "query", "type": "string", "enum": ["week", "month"], "default": "week" }
+        ],
+        "responses": {
+          "200": { "description": "Estatísticas retornadas" }
         }
       }
     },
     "/plans/my": {
       "get": {
         "tags": ["Plans"],
-        "summary": "Ver meu Plano (Cliente)",
-        "description": "Retorna o plano de treino atribuído ao cliente logado (Requer Token)",
+        "summary": "Ver meu Plano Atual",
         "security": [{ "Bearer": [] }],
         "responses": {
-          "200": { "description": "Plano de treino retornado" },
-          "404": { "description": "Ainda não tens plano" }
+          "200": { "description": "Plano retornado" },
+          "404": { "description": "Nenhum plano atribuído" }
+        }
+      }
+    },
+    "/users/trainers": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Listar Treinadores Públicos",
+        "responses": {
+          "200": { "description": "Lista de treinadores disponíveis" }
         }
       }
     }
