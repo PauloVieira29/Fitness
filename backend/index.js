@@ -26,6 +26,7 @@ const port = process.env.PORT || 5000;
 // Permite o localhost (testes) e o frontend no Vercel (que vamos configurar depois)
 const allowedOrigins = [
   "http://localhost:3000",
+  "http://localhost:5000",
   process.env.FRONTEND_URL // Variável que irás definir no Render com o link do Vercel
 ];
 

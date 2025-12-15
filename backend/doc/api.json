@@ -5,12 +5,7 @@
     "title": "Fitness Platform API",
     "description": "API completa com fluxos de Treinador, Cliente e Treinos."
   },
-  "host": "localhost:5000",
   "basePath": "/api",
-  "schemes": [
-    "http",
-    "https"
-  ],
   "securityDefinitions": {
     "Bearer": {
       "type": "apiKey",
