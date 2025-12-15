@@ -1,0 +1,51 @@
+/* src/pages/css/ClientDashboard.css */
+.dashboard-page {
+  background-color: var(--bg);
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+.dashboard-header-page {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.btn-back-page {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-back-page:hover {
+  background: var(--border);
+  transform: translateX(-3px);
+}
+
+.header-text h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--text);
+}
+
+.header-text p {
+  margin: 0.2rem 0 0 0;
+  color: var(--text-light);
+}
+
+@media (max-width: 640px) {
+  .dashboard-header-page {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

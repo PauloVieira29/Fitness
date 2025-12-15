@@ -1,0 +1,146 @@
+/* src/pages/css/TrainerList.css */
+.tl-page {
+  background: var(--bg);
+  min-height: 100vh;
+  padding-top: 90px;
+}
+
+.tl-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tl-header h1 {
+  font-size: 2.8rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.tl-header p {
+  font-size: 1.2rem;
+  color: #6b7280;
+}
+
+.tl-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tl-search-input {
+  padding: 0.9rem 1.2rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--text);
+  width: 320px;
+  max-width: 100%;
+  font-size: 1rem;
+}
+
+.tl-search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
+
+.tl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.tl-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tl-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.tl-avatar {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.tl-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tl-online-dot {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 18px;
+  height: 18px;
+  background: #10b981;
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(16,185,129,0.6);
+}
+
+.tl-info {
+  padding: 1.5rem;
+}
+
+.tl-info h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+
+.tl-badge {
+  background: var(--primary);
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin: 0.3rem 0.4rem 0.3rem 0;
+}
+
+.tl-bio {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.tl-no-results {
+  text-align: center;
+  grid-column: 1 / -1;
+  font-size: 1.2rem;
+  color: #9ca3af;
+  padding: 3rem;
+}
+
+/* NOVA ADIÇÃO: Melhor alinhamento em mobile */
+@media (max-width: 680px) {
+  .tl-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tl-search-input,
+  .ms-wrapper {
+    width: 100%;
+    max-width: none;
+  }
+
+  .ms-display {
+    justify-content: space-between;
+  }
+}

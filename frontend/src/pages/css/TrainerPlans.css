@@ -1,0 +1,379 @@
+/* src/pages/css/TrainerPlans.css */
+.trainer-plans-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+}
+
+.hero-trainer {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.hero-trainer h1 { font-size: 3rem; margin-bottom: 1rem; }
+.hero-trainer p { font-size: 1.3rem; opacity: 0.95; margin-bottom: 2rem; }
+
+.template-form-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 3rem;
+}
+
+.template-form-card input,
+.template-form-card textarea,
+.template-form-card select {
+  width: 100%;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.days-section {
+  margin: 1.5rem 0;
+}
+
+.day-block {
+  background: var(--surface);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-light);
+}
+
+.templates-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.template-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+}
+
+.template-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.template-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0.8rem 0;
+}
+
+.template-notes {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 1rem 0;
+}
+
+.template-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.template-actions button {
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.template-actions button.danger { color: #ef4444; }
+.template-actions button:hover { color: var(--primary); }
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-row input,
+.form-row select {
+  width: 100%;
+}
+
+.suffix {
+  margin-left: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.day-block {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.day-header select {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.exercises-list {
+  margin-top: 1rem;
+}
+
+.exercise-row {
+  display: grid;
+  grid-template-columns: 2fr 0.7fr 0.9fr 0.7fr 1.2fr auto;
+  gap: 0.8rem;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  padding-right: 0.5rem;
+}
+
+.exercise-row button[class*="btn-danger"]{
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.exercise-row button[class*="btn-danger"]:hover{
+  background: #dc2626;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.exercise-row button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.day-label {
+  font-weight: 600;
+  color: var(--primary);
+  margin-right: 1rem;
+  min-width: 60px;
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.limit-text {
+  color: var(--primary);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Toggle bonito */
+.toggle-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  padding: 14px 24px;
+  border-radius: 50px;
+  border: 2px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 64px;
+  height: 36px;
+  background: #ccc;
+  border-radius: 50px;
+  transition: all 0.3s;
+}
+
+.toggle-switch.active {
+  background: var(--primary);
+}
+
+.switch-knob {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 28px;
+  height: 28px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.toggle-switch.active .switch-knob {
+  transform: translateX(28px);
+}
+
+.toggle-label {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+/* Campo de cliente */
+.client-selector-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.client-selector-card select {
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  border: 2px solid var(--border-light);
+  background: var(--surface);
+  font-size: 1.1rem;
+}
+
+/* Botão Editar – bonito e consistente */
+.btn-edit {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  flex: 1;
+  min-width: 100px;
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.template-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.template-actions button {
+  flex: 1;
+}
+
+.remove-exercise-btn {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+  margin-left: 8px;
+}
+
+.remove-exercise-btn:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.remove-exercise-btn:active {
+  transform: scale(0.95);
+}
+
+.exercise-row {
+  grid-template-columns: 2fr 0.7fr 0.9fr 0.7fr 1.2fr 50px !important;
+  gap: 0.8rem;
+}

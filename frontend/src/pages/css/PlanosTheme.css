@@ -1,0 +1,255 @@
+/* src/pages/css/PlanosTheme.css */
+
+/* ====================== VARIÁVEIS DE TEMA ====================== */
+:root[data-theme="light"] {
+  --bg-page: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  --bg-primary: #f8fafc;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #666;
+  --card-bg: #ffffff;
+  --shadow-sm: 0 8px 25px rgba(0,0,0,0.08);
+  --shadow-lg: 0 20px 50px rgba(0,0,0,0.1);
+  --border-light: #e2e8f0;
+  --success: #10b981;
+  --success-dark: #059669;
+  --warning-bg: #fffbeb;
+  --warning-border: #fcd34d;
+  --warning-text: #92400e;
+  --rest-bg: #f1f5f9;
+  --rest-danger-bg: #fee2e2;
+  --rest-danger-text: #991b1b;
+}
+
+:root[data-theme="dark"] {
+  --bg-page: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --bg-primary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --card-bg: #26304a;
+  --shadow-sm: 0 8px 25px rgba(0,0,0,0.3);
+  --shadow-lg: 0 20px 50px rgba(0,0,0,0.4);
+  --border-light: #334155;
+  --success: #34d399;
+  --success-dark: #10b981;
+  --warning-bg: #451a03;
+  --warning-border: #f97316;
+  --warning-text: #fed7aa;
+  --rest-bg: #334155;
+  --rest-danger-bg: #7f1d1d;
+  --rest-danger-text: #fca5a5;
+}
+
+/* ====================== PÁGINA PLANOS ====================== */
+.planos-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+
+.hero-planos {
+  background: linear-gradient(135deg, var(--success), var(--success-dark));
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.hero-planos h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; }
+.hero-planos p { font-size: 1.25rem; opacity: 0.95; }
+
+.calendar-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow-lg);
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: 30px;
+}
+
+.legend .dot {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.legend .dot.workout { background: var(--success); }
+.legend .dot.today { background: #1e40af; }
+
+/* ====================== PÁGINA PLANO DO DIA ====================== */
+.plano-do-dia {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.hero-plano {
+  background: linear-gradient(135deg, var(--success), var(--success-dark));
+  color: white;
+  padding: 50px 0 30px;
+}
+
+.header-plano {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.btn-back {
+  color: white;
+  font-size: 1.1rem;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.data-grande {
+  font-size: 1.5rem;
+  opacity: 0.95;
+  text-transform: capitalize;
+  margin-top: 8px;
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.info-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.info-card .label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.info-card .value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.secao-treino {
+  margin-bottom: 50px;
+}
+
+.secao-treino h2 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.secao-treino.principal h2 {
+  color: var(--success);
+}
+
+.exercicios { display: grid; gap: 16px; }
+
+.exercicio-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s;
+}
+
+.exercicio-card:hover {
+  transform: translateY(-4px);
+}
+
+.exercicio-nome {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.exercicio-detalhes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.exercicio-detalhes span {
+  background: var(--rest-bg);
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.exercicio-detalhes .descanso {
+  background: var(--rest-danger-bg) !important;
+  color: var(--rest-danger-text);
+}
+
+.exercicio-card.aquecimento,
+.exercicio-card.cooldown {
+  background: rgba(16, 185, 129, 0.08);
+  border-left: 6px solid var(--success);
+}
+
+.dark .exercicio-card.aquecimento,
+.dark .exercicio-card.cooldown {
+  background: rgba(52, 211, 153, 0.15);
+}
+
+.notas-treinador {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 40px 0;
+}
+
+.notas-treinador h3 {
+  color: var(--warning-text);
+  margin-bottom: 12px;
+}
+
+.acoes-finais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.btn.large {
+  padding: 16px 32px;
+  font-size: 1.2rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .header-plano { flex-direction: column; text-align: center; }
+  .data-grande { font-size: 1.3rem; }
+}

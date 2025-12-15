@@ -1,0 +1,239 @@
+/* src/css/CalendarTheme.css */
+/* Variáveis globais (se ainda não tens num ficheiro global, podes colar isto no index.css ou num _variables.css) */
+:root {
+  --card-bg: #ffffff;
+  --day-bg: transparent;
+  --text-primary: #1f2937;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  --card-bg: #111827;
+  --day-bg: rgba(255,255,255,0.05);
+  --text-primary: #f3f4f6;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --border: #374151;
+}
+
+/* ==================== CALENDÁRIO MENSAL ==================== */
+.calendar {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  font-family: inherit;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 10px;
+  color: var(--text-secondary);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 1rem;
+  border-radius: 12px;
+  transition: all 0.2s;
+  background: var(--day-bg);
+  color: var(--text-primary);
+}
+
+.calendar-day.empty { background: transparent; }
+
+.calendar-day.today {
+  background: #10b981;
+  color: white;
+  font-weight: 700;
+}
+
+.calendar-day.workout:not(.today) {
+  background: #ecfdf5;
+  color: #065f46;
+  font-weight: 600;
+}
+
+.calendar-day.workout.clickable:hover {
+  background: #a7f3d0;
+  transform: scale(1.05);
+}
+
+/* Dark mode mensal */
+[data-theme="dark"] .calendar-day.workout:not(.today) {
+  background: #064e3b;
+  color: #86efac;
+}
+
+[data-theme="dark"] .calendar-day.workout.clickable:hover {
+  background: #065f46;
+}
+
+.workout-dot {
+  position: absolute;
+  bottom: 8px;
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+}
+
+/* ==================== CALENDÁRIO SEMANAL ==================== */
+.week-calendar {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.week-calendar:hover { transform: translateY(-4px); }
+
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.click-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.week-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  text-align: center;
+}
+
+.week-day {
+  padding: 12px 4px;
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.2s;
+  background: var(--day-bg);
+  color: var(--text-primary);
+}
+
+.week-day.today {
+  background: #10b981;
+  color: white;
+  font-weight: 700;
+}
+
+.week-day.workout:not(.today) {
+  background: #ecfdf5;
+  color: #065f46;
+  font-weight: 600;
+}
+
+.week-day.workout.clickable:hover {
+  transform: scale(1.05);
+  background: #a7f3d0;
+}
+
+[data-theme="dark"] .week-day.workout:not(.today) {
+  background: #064e3b;
+  color: #86efac;
+}
+
+[data-theme="dark"] .week-day.workout.clickable:hover {
+  background: #065f46;
+}
+
+.weekday {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.daynum {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ==================== MODAL ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.modal-close:hover {
+  background: rgba(0,0,0,0.1);
+  color: var(--text-primary);
+}

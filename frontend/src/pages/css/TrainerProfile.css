@@ -1,0 +1,149 @@
+/* src/pages/css/TrainerProfile.css */
+.tp-page {
+  background: var(--bg);
+  min-height: 100vh;
+  padding-top: 90px;
+}
+
+.tp-avatar-header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  margin-bottom: 1rem;
+}
+
+.tp-avatar-large {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 8px solid var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 640px) {
+  .tp-avatar-large {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.tp-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.tp-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tp-header h1 {
+  font-size: 2.6rem;
+  margin: 0.5rem 0;
+  color: var(--text);
+}
+
+.tp-role {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.tp-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.tp-badge {
+  background: var(--primary);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.tp-no-spec {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.tp-section {
+  margin-bottom: 3rem;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.tp-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.tp-bio {
+  line-height: 1.7;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.tp-stats {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.tp-stat {
+  text-align: center;
+}
+
+.tp-stat strong {
+  display: block;
+  font-size: 2.4rem;
+  color: var(--primary);
+}
+
+.tp-stat span {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.tp-actions {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+/* Botão quando desativado ou estado informativo */
+.btn.disabled-state {
+  background: #1d4ed8 !important;
+  color: white !important;
+  opacity: 1 !important;
+  font-weight: 600;
+  cursor: default;
+  border: none;
+}
+
+/* Garantir visibilidade no modo claro */
+.light .btn.disabled-state {
+  background: #1d4ed8 !important;
+}
+
+/* Modo escuro */
+.dark .btn.disabled-state {
+  background: #3b82f6 !important;
+}
+
+.tp-error {
+  text-align: center;
+  padding: 120px 0;
+  color: #ef4444;
+  font-size: 1.3rem;
+}

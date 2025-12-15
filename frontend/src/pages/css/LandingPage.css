@@ -1,0 +1,227 @@
+/* src/pages/LandingPage.css */
+.landing { width: 100%; }
+
+/* ===== HERO ===== */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+@media (min-width: 768px) {
+  .hero-title { font-size: 3.75rem; }
+}
+
+/* TEXTO DO HERO AGORA BEM VISÍVEL */
+.hero-text {
+  font-size: 1.25rem;
+  color: #475569;
+  max-width: 48rem;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+[data-theme="dark"] .hero-text {
+  color: #cbd5e1;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* STATS*/
+.stats-section-custom {
+  background: var(--gradient-hero);          
+  padding: 5rem 2rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 4rem auto;
+  border-radius: 34px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  backdrop-filter: blur(10px);             
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stats-wrapper-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.stats-grid-custom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5rem;
+  text-align: center;
+  justify-items: center;
+}
+
+@media (max-width: 767px) {
+  .stats-section-custom {
+    margin: 2.5rem 1rem;
+    padding: 4rem 1.5rem;
+    border-radius: 28px;
+  }
+  .stats-grid-custom {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+.stats-block-custom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-number-custom {
+  font-size: 4.8rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.stats-text-custom {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.5px;
+}
+
+/* ===== SECTION TITLE ===== */
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* ===== FEATURES ===== */
+.feature-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+}
+.feature-icon.blue { background: #3b82f6; }
+.feature-icon.green { background: #10b981; }
+.feature-icon.purple { background: #8b5cf6; }
+
+/* ===== TESTIMONIALS ===== */
+.testimonials {
+  background: #f9fafb;
+  padding: 6rem 0;
+}
+[data-theme='dark'] .testimonials {
+  background: #0f172a;
+}
+
+.testimonials .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .testimonials .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.testimonial-card {
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.testimonial-quote {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  font-weight: 500;
+  color: #1e293b;
+}
+[data-theme='dark'] .testimonial-quote {
+  color: #e2e8f0;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+}
+.name {
+  font-weight: 600;
+  color: var(--text);
+}
+.role {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* ===== CTA ===== */
+.cta {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 6rem 0;
+}
+.cta-text {
+  font-size: 1.3rem;
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+  opacity: 0.95;
+  line-height: 1.7;
+}
+
+/* ===== GRID RESPONSIVO ===== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 768px) {
+  .md-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .md-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}

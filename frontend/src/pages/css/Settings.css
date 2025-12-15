@@ -1,0 +1,78 @@
+/* src/pages/css/Settings.css */
+.settings-page {
+  background: var(--bg);
+  padding-top: 90px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.settings-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.settings-card h2 {
+  margin: 0 0 1rem 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin: 0.75rem 0;
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+  margin-right: 0.75rem;
+  accent-color: var(--primary);
+}
+
+.toggle-theme {
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-theme:hover {
+  opacity: 0.9;
+}
+
+/* GRID RESPONSIVO: 2 COLUNAS EM DESKTOP */
+.units-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .units-grid {
+    grid-template-columns: 1fr 1fr; /* 50% cada */
+  }
+}
+
+/* Mobile: empilhar */
+@media (max-width: 767px) {
+  .units-grid > .settings-card {
+    margin-bottom: 0;
+  }
+}

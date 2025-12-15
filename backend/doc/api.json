@@ -1,0 +1,158 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Fitness Platform API",
+    "description": "API completa para gestão de treinos, utilizadores e planos."
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Insira o token no formato: Bearer <seu_token_aqui>"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    { "name": "Auth", "description": "Autenticação e Registo" },
+    { "name": "Users", "description": "Gestão de Utilizadores e Perfil" },
+    { "name": "Plans", "description": "Gestão de Planos de Treino" }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "Registar um novo utilizador (Cliente ou Treinador)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["username", "password", "role"],
+              "properties": {
+                "username": { "type": "string", "example": "novo_cliente" },
+                "password": { "type": "string", "example": "123456" },
+                "role": { "type": "string", "enum": ["client", "trainer"], "example": "client" },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string", "example": "João Silva" },
+                    "email": { "type": "string", "example": "joao@email.com" }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Registo efetuado com sucesso" },
+          "400": { "description": "Erro de validação ou utilizador já existe" }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "Login para obter o Token de acesso",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["username", "password"],
+              "properties": {
+                "username": { "type": "string", "example": "admin" },
+                "password": { "type": "string", "example": "admin" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": { "type": "string", "description": "Token JWT para usar nas outras rotas" },
+                "user": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Obter o meu perfil",
+        "description": "Retorna os dados do utilizador logado (Requer Token)",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": { "description": "Dados do perfil retornados com sucesso" },
+          "401": { "description": "Não autorizado (Falta token)" }
+        }
+      },
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Atualizar Perfil",
+        "description": "Atualiza peso, altura ou outros dados (Requer Token)",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "weight": { "type": "number", "example": 75.5 },
+                "height": { "type": "number", "example": 180 },
+                "goal": { "type": "string", "example": "Ganhar massa muscular" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Perfil atualizado" }
+        }
+      }
+    },
+    "/users/trainers": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Listar Treinadores",
+        "description": "Lista todos os treinadores validados na plataforma",
+        "responses": {
+          "200": { "description": "Lista de treinadores" }
+        }
+      }
+    },
+    "/plans/my": {
+      "get": {
+        "tags": ["Plans"],
+        "summary": "Ver meu Plano (Cliente)",
+        "description": "Retorna o plano de treino atribuído ao cliente logado (Requer Token)",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": { "description": "Plano de treino retornado" },
+          "404": { "description": "Ainda não tens plano" }
+        }
+      }
+    }
+  }
+}
